@@ -1,12 +1,28 @@
 body{
     border: 2px solid black;
 }
-.Header{
-    display: flex;
-    justify-content: space-between;
+.Header {
+    border-bottom: 2px solid black;
+}
+.Header__content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+    overflow: auto;
     align-items: center;
+}
+.Header__content__left{
+    justify-self: start;
+    margin-left: 15px;
+}
+.Header__content__Menu{
+    justify-self: end;
+    margin-right: 15px;
+}
+.Header__content__title{
+    margin: auto;
 }
 .Main{
     margin-left: 5px;
-    border-top: 2px solid black;
+
 }
