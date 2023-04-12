@@ -1,0 +1,12 @@
+body{
+    border: 2px solid black;
+}
+.Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Main{
+    margin-left: 5px;
+    border-top: 2px solid black;
+}
