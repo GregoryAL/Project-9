@@ -1,0 +1,24 @@
+.Startup{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    overflow: auto;
+    align-items: center;
+}
+.Startup__Login, .Startup__Signup{
+    margin: auto;
+}
+.Startup__Signup__Button{
+    display: flex;
+    justify-content: center;
+}
+.Startup__Login__Button, .Signup__Button{
+    display: flex;
+    justify-content: end;
+}
+.Signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

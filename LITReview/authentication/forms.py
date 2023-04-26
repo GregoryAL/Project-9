@@ -10,3 +10,7 @@ class LoginForm(forms.Form):
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
+        help_texts = {
+            'password1': None,
+            'username': None
+        }

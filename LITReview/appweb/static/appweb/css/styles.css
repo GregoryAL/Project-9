@@ -1,0 +1,16 @@
+.main__fluxlist__ticketItem{
+    width: 90vw;
+    border: 1px solid black;
+    margin: 10px;
+}
+.main__fluxlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main_buttons{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

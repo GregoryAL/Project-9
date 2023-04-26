@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="main__TitleDiv">
+        <h2 class="main__TitleDiv__Title">Créer une critique</h2>
+    </div>
+    <div class="Main__Ticket">
+        <p>Livre/Article</p>
+        {% if form.instance.ticket %}
+            <form method="POST" action="{% url 'ticketcreation' id_ticket=form.instance.ticket %}">
+        {% else %}
+            <form method="POST" action="{% url 'ticketcreation'%}">
+        {% endif %}
+                {% csrf_token %}
+                {{ form.as_p }}
+            </form>
+    </div>
+    <div class="Main__Review">
+        <p>Critique</p>
+        {% if form.instance.id %}
+            <form method="POST" action="{% url 'reviewcreation' id_review=form.instance.id %}">
+        {% else %}
+            <form method="POST" action="{% url 'reviewcreation' %}">
+        {% endif %}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn" type="submit">Envoyer</button>
+            </form>
+    </div>
+{% endblock content %}

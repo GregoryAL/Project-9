@@ -25,4 +25,10 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', appweb.views.home, name='home'),
     path('signup/', authentication.views.signup_page, name='signup'),
+    path('subscription/', appweb.views.subscription, name='subscription'),
+    path('ticketcreation/', appweb.views.ticket_creation, name='ticketcreation'),
+    path('ticketcreation/<int:id_ticket>', appweb.views.ticket_creation, name='ticketcreation'),
+    path('reviewcreation/', appweb.views.review_creation, name='reviewcreation'),
+    path('reviewcreation/<int:id_ticket>/', appweb.views.review_creation, name='reviewcreation'),
+    path('reviewcreation/<int:id_ticket>/<int:id_review>', appweb.views.review_creation, name='reviewcreation')
 ]

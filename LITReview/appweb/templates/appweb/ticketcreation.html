@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="main__TitleDiv">
+        <h2 class="main__TitleDiv__Title">Créer un Ticket</h2>
+    </div>
+    {% if form.instance.id %}
+        <form method="POST" action="{% url 'ticketcreation' id_ticket=form.instance.id %}">
+    {% else %}
+        <form method="POST" action="{% url 'ticketcreation'%}">
+    {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn" type="submit">Envoyer</button>
+        </form>
+{% endblock content %}
