@@ -2,6 +2,7 @@
     width: 90vw;
     border: 1px solid black;
     margin: 10px;
+    display: block;
 }
 .main__fluxlist{
     display: flex;

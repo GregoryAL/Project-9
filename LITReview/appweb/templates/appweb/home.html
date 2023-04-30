@@ -23,7 +23,9 @@
             <img src=" url ticket.image " alt="Image ticket">
             {% endif %}
             {% if ticket.user.id != request.user.id %}
-            <a class="btn" href="{% url 'ticketcreation' ticket.id %}">Créer une critique</a>
+            <a class="btn" href="{% url 'reviewcreation' ticket.id %}">Créer une critique</a>
+            {% else %}
+            <a class="btn" href="{% url 'ticketcreation' ticket.id %}">Modifier mon ticket</a>
             {% endif %}
         </div>
         {% endfor %}
