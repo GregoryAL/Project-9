@@ -9,9 +9,42 @@
     flex-direction: column;
     align-items: center;
 }
-.main_buttons{
+.main__buttons{
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.main__subscription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main__subscription__subscription__input{
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+    width: 60vw;
+    height: 70px;
+}
+.main__subscription__title{
+    text-align: center;
+}
+.main__subscription__followed__item{
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+    border: solid black 1px;
+}
+.main__subscription__followed__item__link{
+    border-left: solid black 1px;
+    text-align: center;
+}
+.main__subscription__follower__item{
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: solid black 1px;
+}
+.btn{
+    align-items: end;
 }

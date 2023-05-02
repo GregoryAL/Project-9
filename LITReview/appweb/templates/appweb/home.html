@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
-    <div class="main_buttons">
+    <div class="main__buttons">
         <div class="main__buttons__askingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Demander une critique</a></div>
         <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Créer une critique</a></div>
     </div>
@@ -23,9 +23,9 @@
             <img src=" url ticket.image " alt="Image ticket">
             {% endif %}
             {% if ticket.user.id != request.user.id %}
-            <a class="btn" href="{% url 'reviewcreation' ticket.id %}">Créer une critique</a>
+            <a class="btn" href="{% url 'reviewcreation' id_ticket=ticket.id %}">Créer une critique</a>
             {% else %}
-            <a class="btn" href="{% url 'ticketcreation' ticket.id %}">Modifier mon ticket</a>
+            <a class="btn" href="{% url 'ticketcreation' id_ticket=ticket.id %}">Modifier mon ticket</a>
             {% endif %}
         </div>
         {% endfor %}

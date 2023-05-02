@@ -9,8 +9,10 @@
             <p class="main__subscription__title">Suivre d'autres utilisateurs</p>
             <form method="POST" action="{% url 'subscription'%}">
                 {% csrf_token %}
-                {{ form }}
-                <button class="btn" type="submit">Envoyer</button>
+                <div class="main__subscription__subscription__input">
+                    {{ form }}
+                    <button class="btn" type="submit">Envoyer</button>
+                </div>
             </form>
         </div>
         <div class="main__subscription__followed">
@@ -18,7 +20,7 @@
             {% for relation in usersfollowing %}
             <div class="main__subscription__followed__item">
                 {{relation.followed_user}}
-                <a href="{% url 'deletesubscription' id_subscription=relation.id %}">Désabonner</a>
+                <a href="{% url 'deletesubscription' id_subscription=relation.id %}" class="main__subscription__followed__item__link">Désabonner</a>
             </div>
             {% endfor %}
         </div>
