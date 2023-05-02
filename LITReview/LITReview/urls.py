@@ -26,6 +26,7 @@ urlpatterns = [
     path('home/', appweb.views.home, name='home'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('subscription/', appweb.views.subscription, name='subscription'),
+    path('deletesubscription/<int:id_subscription>', appweb.views.deletesubscription, name='deletesubscription'),
     path('ticketcreation/', appweb.views.ticket_creation, name='ticketcreation'),
     path('ticketcreation/<int:id_ticket>', appweb.views.ticket_creation, name='ticketcreation'),
     path('reviewcreation/', appweb.views.review_creation, name='reviewcreation'),

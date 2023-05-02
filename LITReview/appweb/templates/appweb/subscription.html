@@ -1,8 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
+{% endblock style %}
 {% block content %}
-    <form method="POST" action="{% url 'subscription'%}">
-        {% csrf_token %}
-        {{ form }}
-        <button class="btn" type="submit">Envoyer</button>
-    </form>
+    <div class="main__subscription">
+        <div class="main__subscription__subscription">
+            <p class="main__subscription__title">Suivre d'autres utilisateurs</p>
+            <form method="POST" action="{% url 'subscription'%}">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn" type="submit">Envoyer</button>
+            </form>
+        </div>
+        <div class="main__subscription__followed">
+            <p class="main__subscription__title">Abonnements</p>
+            {% for relation in usersfollowing %}
+            <div class="main__subscription__followed__item">
+                {{relation.followed_user}}
+                <a href="{% url 'deletesubscription' id_subscription=relation.id %}">Désabonner</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="main__subscription__follower">
+            <p class="main__subscription__title">Abonnés</p>
+            {% for user in usersfollowed %}
+            <div class="main__subscription__follower__item">
+            {{user.user}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

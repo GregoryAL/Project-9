@@ -14,34 +14,35 @@ def home(request):
         ticketsToDisplay += Ticket.objects.filter(user=userfollowed.id)
     return render(request, 'appweb/home.html', {'tickets': ticketsToDisplay})
 
+
 @login_required
 def subscription(request):
+    usersfollowing = UserFollows.objects.filter(user=request.user.id)
+    usersfollowed = UserFollows.objects.filter(followed_user=request.user.id)
     if request.method == "GET":
         form = FollowingForm()
-        return render(request, 'appweb/subscription.html', {'form': form})
+        context = {
+            'form': form,
+            'usersfollowing': usersfollowing,
+            'usersfollowed': usersfollowed
+        }
+        return render(request, 'appweb/subscription.html', context=context)
     elif request.method == "POST":
         form = FollowingForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            #subscription_object = form.save(commit=False)
             followed_user = get_object_or_404(User, username=username)
-            #userEntered = subscription_object.cleaned_data['followed_user']
-            #userToFollow = User.objects.get(username=userEntered)
-            #subscription_object.followed_user = userToFollow
-            #subscription.UserFollows.following = request.user
-            #subscription.save()
             subscript = UserFollows.objects.create(followed_user=followed_user, user=request.user)
             subscript.save()
             return redirect('home')
-    #if request.method == 'POST':
-        #form = subscriptions(request.POST)
-        #if form.is_valid():
-            #userEntered = form.cleaned_data['followed_user']
 
-            #userToFollow = User.objects.get(username=userEntered).id
-            #userFollowing = request.user.id
-            #form.save()
 
+@login_required
+def deletesubscription(request, id_subscription):
+    if request.method == 'GET':
+        usersfollowing = get_object_or_404(UserFollows, pk=id_subscription)
+        usersfollowing.delete()
+        return redirect('subscription')
 
 @login_required
 def ticket_creation(request, id_ticket=None):
