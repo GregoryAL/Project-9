@@ -25,5 +25,5 @@ class ReviewCreation(forms.ModelForm):
             'body': "Commentaire",
         }
         widgets = {
-            'ticket': forms.HiddenInput()
+            'ticket': forms.HiddenInput(attrs={'type': 'hidden'})
         }

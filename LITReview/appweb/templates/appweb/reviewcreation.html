@@ -18,6 +18,8 @@
                 {% if instance_ticket.image %}
                 <img src=" url instance_ticket.image " alt="Image ticket">
                 {% endif %}
+                {{ instance_ticket.id }}
+                {{ instance_review.id }}
             </div>
         {% else %}
             <form method="GET" action="{% url 'ticketcreation'%}">
@@ -36,8 +38,7 @@
             <form method="POST" action="{% url 'reviewcreation' %}">
         {% endif %}
                 {% csrf_token %}
-                {{ form.as_p }}
-                {{ form.ticket }}
+                {{ form.as_p}}
                 <button class="btn" type="submit">Envoyer</button>
             </form>
     </div>

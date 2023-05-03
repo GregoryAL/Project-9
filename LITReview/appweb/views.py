@@ -59,52 +59,21 @@ def ticket_creation(request, id_ticket=None):
             return redirect('home')
 
 
-def review_and_ticket(request, ticket_id=None, id_review=None):
-    instance_review = Review.objects.get(pk=id_review) if id_review is not None else None
-    if ticket_id == None:
-        pass
-    else:
-        instance_ticket = Ticket.objects.get(pk=ticket_id)
-
-
-
-
 @login_required
-def review_creation(request, id_ticket=None, id_review=None):
+def review_creation(request, id_ticket=None):
     instance_ticket = Ticket.objects.get(pk=id_ticket) if id_ticket is not None else None
-    instance_review = Review.objects.get(pk=id_review) if id_review is not None else None
     if request.method == "GET":
-        form = ReviewCreation(instance=instance_review)
-        form.ticket = instance_ticket
-        if instance_ticket is not None:
-            context = {
-                'form': form,
-                'instance_ticket': instance_ticket,
-            }
-        else:
-            context = {
-                'form': form,
+        form = ReviewCreation(initial={'ticket': instance_ticket})
+        context = {
+            'form': form,
+            'instance_ticket': instance_ticket,
+            'id_ticket': id_ticket
             }
         return render(request, 'appweb/reviewcreation.html', context=context)
     elif request.method == "POST":
-        form = ReviewCreation(request.POST, instance=instance_review)
+        form = ReviewCreation(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.ticket = request.URL
             review.user = request.user
             review.save()
             return redirect('home')
-
-
-
-@login_required()
-def display_ticket(request):
-    usersfollowed = list(UserFollows.objects.filter(followed_user=request.user.id))
-    ticketsToDisplay = []
-    for userfollowed in usersfollowed:
-        ticketsToDisplay += Ticket.objects.filter(user=userfollowed.id)
-    return render(request, 'appweb/home.html', {'tickets': ticketsToDisplay})
-
-
-
-

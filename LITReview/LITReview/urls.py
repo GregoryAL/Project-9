@@ -30,7 +30,6 @@ urlpatterns = [
     path('ticketcreation/', appweb.views.ticket_creation, name='ticketcreation'),
     path('ticketcreation/<int:id_ticket>', appweb.views.ticket_creation, name='ticketcreation'),
     path('reviewcreation/', appweb.views.review_creation, name='reviewcreation'),
-    path('reviewcreation/<int:id_ticket>/', appweb.views.review_creation, name='reviewcreation'),
-    path('reviewcreation/<int:id_ticket>/<int:id_review>', appweb.views.review_creation, name='reviewcreation')
+    path('reviewcreation/<int:id_ticket>/', appweb.views.review_creation, name='reviewcreation')
 ]
 
