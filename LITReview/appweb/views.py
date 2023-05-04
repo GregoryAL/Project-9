@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from appweb.forms import TicketCreation, FollowingForm, ReviewCreation
+from appweb.forms import TicketCreation, FollowingForm, ReviewCreation, ReviewCreationWithoutTicket
 from authentication.models import User
 from appweb.models import Ticket, Review, UserFollows
+
 
 
 @login_required
@@ -77,3 +78,26 @@ def review_creation(request, id_ticket=None):
             review.user = request.user
             review.save()
             return redirect('home')
+
+
+@login_required
+def ticket_review_creation(request):
+    if request.method == "GET":
+        ticket_form = TicketCreation()
+        review_form = ReviewCreationWithoutTicket()
+        context = {
+            'ticket_form': ticket_form,
+            'review_form': review_form
+            }
+        return render(request, 'appweb/ticketreviewcreation.html', context=context)
+    elif request.method == "POST":
+        ticket_form = TicketCreation(request.POST)
+        review_form = ReviewCreationWithoutTicket(request.POST)
+        if ticket_form.is_valid():
+            instance_ticket = ticket_form.customSave(request.user)
+            if review_form.is_valid():
+                instance_review = review_form.save(commit=False)
+                instance_review.user = request.user
+                instance_review.ticket = instance_ticket
+                instance_review.save()
+                return redirect('home')

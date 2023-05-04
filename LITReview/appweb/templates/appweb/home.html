@@ -6,7 +6,7 @@
 {% block content %}
     <div class="main__buttons">
         <div class="main__buttons__askingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Demander une critique</a></div>
-        <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Créer une critique</a></div>
+        <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketreviewcreation' %}">Créer une critique</a></div>
     </div>
     <div class="main__fluxlist">
         {% for ticket in tickets %}

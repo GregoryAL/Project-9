@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="main__Review__TitleDiv">
+        <h2 class="main__TitleDiv__Title">Créer une critique</h2>
+    </div>
+    <form method="POST" action="{% url 'ticketreviewcreation'%}">
+        <div class="Main__Review__Ticket">
+            <p>Livre/Article</p>
+                {% csrf_token %}
+                {{ ticket_form.as_p }}
+        </div>
+        <div class="Main__Review__Review">
+            <p>Critique</p>
+                {% csrf_token %}
+                {{ review_form.as_p}}
+        </div>
+        <button class="btn" type="submit">Envoyer</button>
+    </form>
+{% endblock content %}
