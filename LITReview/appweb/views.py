@@ -1,19 +1,30 @@
+from itertools import chain
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from appweb.forms import TicketCreation, FollowingForm, ReviewCreation, ReviewCreationWithoutTicket
 from authentication.models import User
 from appweb.models import Ticket, Review, UserFollows
+from django.db.models import CharField, Value, Q
 
 
 
 @login_required
 def home(request):
-    usersfollowed = UserFollows.objects.filter(followed_user=request.user.id)
-    ticketsToDisplay = []
-    ticketsToDisplay += Ticket.objects.filter(user=request.user.id)
-    for userfollowed in usersfollowed:
-        ticketsToDisplay += Ticket.objects.filter(user=userfollowed.id)
-    return render(request, 'appweb/home.html', {'tickets': ticketsToDisplay})
+    reviews = Review.objects.filter(
+        Q(user=request.user) |
+        Q(user__followed_by__user=request.user)
+    ).annotate(content_type=Value('Review', CharField()))
+
+    ticketsWithoutReview = Ticket.objects.filter(
+        Q(user=request.user) |
+        Q(user__followed_by__user=request.user)
+    ).distinct().annotate(content_type=Value('TicketWithoutReview', CharField())).exclude(~Q(review=None))
+    ticketsWithReview = Ticket.objects.filter(
+        Q(user=request.user) |
+        Q(user__followed_by__user=request.user)
+    ).distinct().annotate(content_type=Value('TicketWithReview', CharField())).exclude(Q(review=None))
+    ticketsAndReviews = sorted(chain(ticketsWithoutReview, ticketsWithReview, reviews), key=lambda x: x.time_created, reverse=True)
+    return render(request, 'appweb/home.html', {'posts': ticketsAndReviews})
 
 
 @login_required

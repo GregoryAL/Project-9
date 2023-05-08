@@ -9,25 +9,12 @@
         <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketreviewcreation' %}">Créer une critique</a></div>
     </div>
     <div class="main__fluxlist">
-        {% for ticket in tickets %}
-        <div class="main__fluxlist__ticketItem">
-            <p class="main__fluxlist__ticketItem__dateTime"> {{ ticket.time_created }} </p>
-            {% if ticket.user.id == request.user.id %}
-                <p class="main__fluxlist__ticketItem__user"> Vous avez demandé une critique</p>
+        {% for post in posts %}
+            {% if post.content_type == 'TicketWithoutReview' %}
+                {% include 'appweb/partials/ticket_snippet.html' with ticket=post %}
             {% else %}
-                <p class="main__fluxlist__ticketItem__user"> {{ ticket.user.username }} a demandé une critique</p>
+                <p> pouet </p>
             {% endif %}
-            <p> {{ ticket.title }}</p>
-            <p> {{ ticket.description}}</p>
-            {% if ticket.image %}
-            <img src=" url ticket.image " alt="Image ticket">
-            {% endif %}
-            {% if ticket.user.id != request.user.id %}
-            <a class="btn" href="{% url 'reviewcreation' id_ticket=ticket.id %}">Créer une critique</a>
-            {% else %}
-            <a class="btn" href="{% url 'ticketcreation' id_ticket=ticket.id %}">Modifier mon ticket</a>
-            {% endif %}
-        </div>
         {% endfor %}
     </div>
 {% endblock content %}

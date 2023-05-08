@@ -1,9 +1,17 @@
-{% load webapp_extras %}
-<div class="post">
-    <a href="{% url 'view_ticket' ticket.id %}">
-        <h4>Ticket : {{ ticket.title }}</h4>
-        <img src="{{ ticket.photo.image.url }}">
-        <p><strong>Écrit par {{ ticket.user }}</strong></p>
-        <p>{{ ticket.date_created|get_posted_at_display }}</p>
-    </a>
+
+<div class="main__fluxlist__ticketItem">
+    <p class="main__fluxlist__ticketItem__dateTime"> {{ ticket.time_created }} </p>
+    {% if ticket.user.id == request.user.id %}
+        <p class="main__fluxlist__ticketItem__user"> Vous avez demandé une critique</p>
+    {% else %}
+        <p class="main__fluxlist__ticketItem__user"> {{ ticket.user.username }} a demandé une critique</p>
+    {% endif %}
+    <p> {{ ticket.title }}</p>
+    <p> {{ ticket.description}}</p>
+    {% if ticket.image %}
+    <img src=" url ticket.image " alt="Image ticket">
+    {% endif %}
+    <a class="btn" href="{% url 'reviewcreation' id_ticket=ticket.id %}">Créer une critique</a>
+
+    <p></p>
 </div>
