@@ -1,7 +1,15 @@
-.main__fluxlist__ticketItem{
+.main__fluxlist__block{
     width: 90vw;
     border: 1px solid black;
-    margin: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+}
+.main_fluxlist__reviewblock__ticketItem{
+    width: 80vw;
+    border: 1px solid black;
+    margin: auto;
+    margin-bottom: 10px;
     display: block;
 }
 .main__fluxlist{

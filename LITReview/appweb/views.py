@@ -21,10 +21,11 @@ def home(request):
     ).distinct().annotate(content_type=Value('TicketWithoutReview', CharField())).exclude(~Q(review=None))
     ticketsWithReview = Ticket.objects.filter(
         Q(user=request.user) |
-        Q(user__followed_by__user=request.user)
+        Q(user__followed_by__user=request.user) |
+        Q(review__user=request.user)
     ).distinct().annotate(content_type=Value('TicketWithReview', CharField())).exclude(Q(review=None))
-    ticketsAndReviews = sorted(chain(ticketsWithoutReview, ticketsWithReview, reviews), key=lambda x: x.time_created, reverse=True)
-    return render(request, 'appweb/home.html', {'posts': ticketsAndReviews})
+    ticketsAndReviews = sorted(chain(ticketsWithoutReview, reviews), key=lambda x: x.time_created, reverse=True)
+    return render(request, 'appweb/home.html', {'posts': ticketsAndReviews, 'ticketswithreview': ticketsWithReview})
 
 
 @login_required
