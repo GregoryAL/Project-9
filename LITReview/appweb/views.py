@@ -7,7 +7,6 @@ from appweb.models import Ticket, Review, UserFollows
 from django.db.models import CharField, Value, Q
 
 
-
 @login_required
 def home(request):
     reviews = Review.objects.filter(
@@ -78,6 +77,7 @@ def deletesubscription(request, id_subscription):
         usersfollowing.delete()
         return redirect('subscription')
 
+
 @login_required
 def ticket_creation(request, id_ticket=None):
     instance_ticket = Ticket.objects.get(pk=id_ticket) if id_ticket is not None else None
@@ -90,6 +90,26 @@ def ticket_creation(request, id_ticket=None):
             ticket = form.save(commit=False)
             ticket.user = request.user
             ticket.save()
+            return redirect('home')
+
+
+@login_required
+def review_modification(request, id_review):
+    instance_review = Review.objects.get(pk=id_review)
+    instance_ticket = Ticket.objects.get(pk=instance_review.ticket.id)
+    if request.method == "GET":
+        form = ReviewCreation(instance=instance_review)
+        context = {
+            'form': form,
+            'instance_ticket': instance_ticket
+            }
+        return render(request, 'appweb/reviewmodification.html', context=context)
+    elif request.method == "POST":
+        form = ReviewCreation(request.POST, instance=instance_review)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.save()
             return redirect('home')
 
 

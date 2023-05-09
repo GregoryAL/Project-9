@@ -10,7 +10,7 @@
     <p> {{ review.body}}</p>
     <p></p>
     {% if review.user.id == request.user.id %}
-    <a class="btn" href="{% url 'reviewcreation' id_ticket=ticket.id id_review=review.id %}">Modifier une critique</a>
+    <a class="btn" href="{% url 'reviewmodification' id_review=review.id %}">Modifier une critique</a>
     {% endif %}
 </div>
 <p class="button_space"></p>
