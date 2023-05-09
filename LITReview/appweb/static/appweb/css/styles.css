@@ -1,4 +1,4 @@
-.main__fluxlist__block{
+.main__fluxlist__block, .main__postlist__block{
     width: 90vw;
     border: 1px solid black;
     margin: auto;
@@ -16,6 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.button_space{
+    margin: 40px;
 }
 .main__buttons{
     height: 70px;

@@ -9,7 +9,10 @@
 {% if ticket.image %}
 <img src=" url ticket.image " alt="Image ticket">
 {% endif %}
+{% if ticket.user.id == request.user.id %}
+    <a class="btn" href="{% url 'ticketcreation' id_ticket=ticket.id %}">Modifier un ticket</a>
+{% endif %}
 {% if withreview == False %}
     <a class="btn" href="{% url 'reviewcreation' id_ticket=ticket.id %}">Créer une critique</a>
 {% endif %}
-<p></p>
+<p class="button_space"></p>

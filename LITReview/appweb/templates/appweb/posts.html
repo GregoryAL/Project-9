@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
+{% endblock style %}
+{% block content %}
+    <div class="main__postlist">
+        {% for post in posts %}
+            {% if post.content_type == 'TicketWithoutReview' %}
+                <div class="main__postlist__block">
+                    <div class="main__postlist__ticketItem">
+                    {% include 'appweb/partials/ticket_snippet.html' with ticket=post withreview=False %}
+                    </div>
+                </div>
+            {% elif post.content_type == 'TicketWithReview' %}
+                <div class="main__postlist__block">
+                    <div class="main__postlist__ticketItem">
+                    {% include 'appweb/partials/ticket_snippet.html' with ticket=post withreview=True %}
+                    </div>
+                </div>
+            {% elif post.content_type == 'Review' %}
+                {% for ticket in ownticket %}
+                    {% if ticket.id == post.ticket.id %}
+                        <div class="main__postlist__block">
+                        {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

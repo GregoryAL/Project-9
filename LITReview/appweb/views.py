@@ -29,6 +29,27 @@ def home(request):
 
 
 @login_required
+def posts(request):
+    reviews = Review.objects.filter(
+        Q(user=request.user)
+    ).annotate(content_type=Value('Review', CharField()))
+
+    ticketsWithoutReview = Ticket.objects.filter(
+        Q(user=request.user)
+    ).distinct().annotate(content_type=Value('TicketWithoutReview', CharField())).exclude(~Q(review=None))
+    ticketsWithReview = Ticket.objects.filter(
+        Q(user=request.user) &
+        ~Q(review__user=request.user)
+    ).distinct().annotate(content_type=Value('TicketWithReview', CharField())).exclude(Q(review=None))
+    ownTicketReview = Ticket.objects.filter(
+        Q(user=request.user) &
+        Q(review__user=request.user)
+    ).distinct().annotate(content_type=Value('OwnTicketReview', CharField())).exclude(Q(review=None))
+    ticketsAndReviews = sorted(chain(ticketsWithoutReview, ticketsWithReview, reviews), key=lambda x: x.time_created, reverse=True)
+    return render(request, 'appweb/posts.html', {'posts': ticketsAndReviews, 'ownticket': ownTicketReview})
+
+
+@login_required
 def subscription(request):
     usersfollowing = UserFollows.objects.filter(user=request.user.id)
     usersfollowed = UserFollows.objects.filter(followed_user=request.user.id)
