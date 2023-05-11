@@ -14,22 +14,27 @@
                     <button class="btn" type="submit">Envoyer</button>
                 </div>
             </form>
+            <div class="main__subscription__subscription__errormessage">
+                {% if message %}
+                    {{ message }}
+                {% endif %}
+            </div>
         </div>
         <div class="main__subscription__followed">
             <p class="main__subscription__title">Abonnements</p>
             {% for relation in usersfollowing %}
-            <div class="main__subscription__followed__item">
-                {{relation.followed_user}}
-                <a href="{% url 'deletesubscription' id_subscription=relation.id %}" class="main__subscription__followed__item__link">Désabonner</a>
-            </div>
+                <div class="main__subscription__followed__item">
+                    {{relation.followed_user}}
+                    <a href="{% url 'deletesubscription' id_subscription=relation.id %}" class="main__subscription__followed__item__link">Désabonner</a>
+                </div>
             {% endfor %}
         </div>
         <div class="main__subscription__follower">
             <p class="main__subscription__title">Abonnés</p>
             {% for user in usersfollowed %}
-            <div class="main__subscription__follower__item">
-            {{user.user}}
-            </div>
+                <div class="main__subscription__follower__item">
+                {{user.user}}
+                </div>
             {% endfor %}
         </div>
     </div>

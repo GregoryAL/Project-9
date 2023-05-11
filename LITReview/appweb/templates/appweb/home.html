@@ -13,14 +13,19 @@
             {% if post.content_type == 'TicketWithoutReview' %}
                 <div class="main__fluxlist__block">
                     <div class="main__fluxlist__ticketItem">
-                {% include 'appweb/partials/ticket_snippet.html' with ticket=post withreview=False %}
+                        {% include 'appweb/partials/ticket_snippet.html' with ticket=post %}
+                        {% include 'appweb/partials/review_btn_creation_snippet.html' with ticket=post %}
+                        <p class="button_space"></p>
                     </div>
                 </div>
             {% elif post.content_type == 'Review' %}
                 {% for ticket in ticketswithreview %}
                     {% if ticket.id == post.ticket.id %}
                         <div class="main__fluxlist__block">
-                        {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
+                            {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
+                            <div class="main_fluxlist__reviewblock__ticketItem">
+                                {% include 'appweb/partials/ticket_snippet.html' with ticket=ticket withreview=True %}
+                            </div>
                         </div>
                     {% endif %}
                 {% endfor %}

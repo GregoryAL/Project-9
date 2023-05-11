@@ -6,27 +6,29 @@
 {% block content %}
     <div class="main__postlist">
         {% for post in posts %}
-            {% if post.content_type == 'TicketWithoutReview' %}
+            {% if post.content_type == 'Ticket' %}
                 <div class="main__postlist__block">
                     <div class="main__postlist__ticketItem">
-                    {% include 'appweb/partials/ticket_snippet.html' with ticket=post withreview=False %}
-                    </div>
-                </div>
-            {% elif post.content_type == 'TicketWithReview' %}
-                <div class="main__postlist__block">
-                    <div class="main__postlist__ticketItem">
-                    {% include 'appweb/partials/ticket_snippet.html' with ticket=post withreview=True %}
+                        {% include 'appweb/partials/ticket_snippet.html' with ticket=post %}
+                        {% include 'appweb/partials/ticket_btn_modify_snippet.html' with ticket=post %}
+                        {% include 'appweb/partials/ticket_btn_delete_snippet.html' with ticket=post %}
+                        <p class="button_space"></p>
                     </div>
                 </div>
             {% elif post.content_type == 'Review' %}
-                {% for ticket in ownticket %}
+                {% for ticket in reviewsticket %}
                     {% if ticket.id == post.ticket.id %}
                         <div class="main__postlist__block">
-                        {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
+                            {% include 'appweb/partials/review_snippet.html' with review=post %}
+                            {% include 'appweb/partials/review_btn_modify_snippet.html' with review=post %}
+                            {% include 'appweb/partials/review_btn_delete_snippet.html' with review=post %}
+                            <p class="button_space"></p>
+                            <div class="main_fluxlist__reviewblock__ticketItem">
+                                {% include 'appweb/partials/ticket_snippet.html' with ticket=ticket %}
+                            </div>
                         </div>
                     {% endif %}
                 {% endfor %}
-
             {% endif %}
             </div>
         {% endfor %}
