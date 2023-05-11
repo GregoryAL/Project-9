@@ -15,7 +15,7 @@
             <p> {{ instance_ticket.title }}</p>
             <p> {{ instance_ticket.description}}</p>
             {% if instance_ticket.image %}
-            <img src=" url instance_ticket.image " alt="Image ticket">
+                <img src=" {{instance_ticket.image.url}} " alt="Image ticket">
             {% endif %}
         </div>
     </div>

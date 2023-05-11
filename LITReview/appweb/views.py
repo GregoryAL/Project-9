@@ -129,7 +129,7 @@ def ticket_creation(request, id_ticket=None):
             form = TicketCreation(instance=instance_ticket)
             return render(request, 'appweb/ticketcreation.html', {'form': form})
         elif request.method == "POST":
-            form = TicketCreation(request.POST, instance=instance_ticket)
+            form = TicketCreation(request.POST, request.FILES, instance=instance_ticket)
             if form.is_valid():
                 ticket = form.save(commit=False)
                 ticket.user = request.user
@@ -191,7 +191,7 @@ def ticket_review_creation(request):
             }
         return render(request, 'appweb/ticketreviewcreation.html', context=context)
     elif request.method == "POST":
-        ticket_form = TicketCreation(request.POST)
+        ticket_form = TicketCreation(request.POST, request.FILES)
         review_form = ReviewCreationWithoutTicket(request.POST)
         if ticket_form.is_valid():
             instance_ticket = ticket_form.customSave(request.user)

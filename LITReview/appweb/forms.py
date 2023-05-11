@@ -12,7 +12,7 @@ class FollowingForm(forms.Form):
 class TicketCreation(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'image']
 
     def customSave(self, user):
         instance_ticket = self.save(commit=False)
@@ -34,6 +34,7 @@ class ReviewCreation(forms.ModelForm):
             'ticket': forms.HiddenInput(attrs={'type': 'hidden'})
         }
 
+
 class ReviewCreationWithoutTicket(forms.ModelForm):
     class Meta:
         model = Review
@@ -43,3 +44,4 @@ class ReviewCreationWithoutTicket(forms.ModelForm):
             'rating': "Note",
             'body': "Commentaire",
         }
+
