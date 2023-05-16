@@ -22,17 +22,35 @@ class TicketCreation(forms.ModelForm):
 
 
 class ReviewCreation(forms.ModelForm):
+    ratingcustom = forms.ChoiceField(
+        label='Note',
+        widget=forms.RadioSelect(attrs={'class': 'rate'}),
+        initial=0,
+        choices=[
+            (0, "0"),
+            (1, "1"),
+            (2, "2"),
+            (3, "3"),
+            (4, "4"),
+            (5, "5")
+        ]
+    )
     class Meta:
         model = Review
-        fields = ['headline', 'rating', 'body', 'ticket']
+        fields = ['headline', 'body', 'ticket']
         labels = {
             'headline': "Titre",
-            'rating': "Note",
             'body': "Commentaire",
         }
         widgets = {
             'ticket': forms.HiddenInput(attrs={'type': 'hidden'})
         }
+    def customSave(self, user, ratingcustom):
+        instanceReview = self.save(commit=False)
+        instanceReview.user = user
+        instanceReview.rating = ratingcustom
+        instanceReview.save()
+        return instanceReview
 
 
 class ReviewCreationWithoutTicket(forms.ModelForm):

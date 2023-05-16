@@ -131,9 +131,7 @@ def ticket_creation(request, id_ticket=None):
         elif request.method == "POST":
             form = TicketCreation(request.POST, request.FILES, instance=instance_ticket)
             if form.is_valid():
-                ticket = form.save(commit=False)
-                ticket.user = request.user
-                ticket.save()
+                instance_ticket = form.customSave(request.user)
                 return redirect('home')
 
 
@@ -143,7 +141,7 @@ def review_modification(request, id_review):
     instance_ticket = Ticket.objects.get(pk=instance_review.ticket.id)
     if instance_review.user.id == request.user.id:
         if request.method == "GET":
-            form = ReviewCreation(instance=instance_review)
+            form = ReviewCreation(instance=instance_review, initial={'ratingcustom': instance_review.rating})
             context = {
                 'form': form,
                 'instance_ticket': instance_ticket
@@ -152,9 +150,8 @@ def review_modification(request, id_review):
         elif request.method == "POST":
             form = ReviewCreation(request.POST, instance=instance_review)
             if form.is_valid():
-                review = form.save(commit=False)
-                review.user = request.user
-                review.save()
+                rating = form.cleaned_data['ratingcustom']
+                review = form.customSave(request.user, rating)
                 return redirect('home')
     else:
         return redirect('home')
@@ -174,9 +171,8 @@ def review_creation(request, id_ticket=None):
     elif request.method == "POST":
         form = ReviewCreation(request.POST)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.save()
+            rating = form.cleaned_data['ratingcustom']
+            review = form.customSave(request.user, rating)
             return redirect('home')
 
 
@@ -196,8 +192,10 @@ def ticket_review_creation(request):
         if ticket_form.is_valid():
             instance_ticket = ticket_form.customSave(request.user)
             if review_form.is_valid():
+                ratingcustom = review_form.cleaned_data['ratingcustom']
                 instance_review = review_form.save(commit=False)
                 instance_review.user = request.user
+                instance_review.rating = ratingcustom
                 instance_review.ticket = instance_ticket
                 instance_review.save()
                 return redirect('home')

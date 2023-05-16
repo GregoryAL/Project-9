@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
+{% endblock style %}
 {% block content %}
     <div class="main__Review__TitleDiv">
         <h2 class="main__TitleDiv__Title">Créer une critique</h2>
@@ -15,7 +19,7 @@
             <p> {{ instance_ticket.title }}</p>
             <p> {{ instance_ticket.description}}</p>
             {% if instance_ticket.image %}
-                <img src=" {{instance_ticket.image.url}} " alt="Image ticket">
+                <img src=" {{instance_ticket.image.url}} " alt="Image ticket" class="image">
             {% endif %}
         </div>
     </div>

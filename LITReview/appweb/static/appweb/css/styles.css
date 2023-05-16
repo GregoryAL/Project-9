@@ -59,3 +59,26 @@
 .btn{
     align-items: end;
 }
+
+.image{
+    width: 150px;
+    height: 150px;
+}
+.formimage{
+    display: flex;
+    position: relative;
+}
+.formimage__field{
+    position: absolute;
+    align-self: center;
+    opacity: 0;
+}
+.formimage__btnimage{
+    position: relative;
+    align-self: start;
+}
+.rate {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}

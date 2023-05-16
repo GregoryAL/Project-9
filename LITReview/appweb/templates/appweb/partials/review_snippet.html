@@ -6,7 +6,19 @@
         <p class="main__fluxlist__reviewblock__reviewItem__user"> {{ review.user.username }} a publié une critique</p>
     {% endif %}
     <p> {{ review.headline }}</p>
-    <p> {{ review.rating}}</p>
+    {% if review.rating == 0 %}
+        <p> ☆☆☆☆☆ </p>
+    {% elif review.rating == 1 %}
+        <p> ★☆☆☆☆ </p>
+    {% elif review.rating == 2 %}
+        <p> ★★☆☆☆ </p>
+    {% elif review.rating == 3 %}
+        <p> ★★★☆☆ </p>
+    {% elif review.rating == 4 %}
+        <p> ★★★★☆ </p>
+    {% elif review.rating == 5 %}
+        <p> ★★★★★ </p>
+    {% endif %}
     <p> {{ review.body}}</p>
     <p></p>
 </div>
