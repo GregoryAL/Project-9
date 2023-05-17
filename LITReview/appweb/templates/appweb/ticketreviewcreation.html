@@ -7,7 +7,7 @@
     <div class="main__Review__TitleDiv">
         <h2 class="main__TitleDiv__Title">Créer une critique</h2>
     </div>
-    <form method="POST" action="{% url 'ticketreviewcreation'%}">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'ticketreviewcreation'%}">
         <div class="Main__Review__Ticket">
             <p>Livre/Article</p>
                 {% csrf_token %}

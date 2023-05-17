@@ -54,12 +54,24 @@ class ReviewCreation(forms.ModelForm):
 
 
 class ReviewCreationWithoutTicket(forms.ModelForm):
+    ratingcustom = forms.ChoiceField(
+        label='Note',
+        widget=forms.RadioSelect(attrs={'class': 'rate'}),
+        initial=0,
+        choices=[
+            (0, "0"),
+            (1, "1"),
+            (2, "2"),
+            (3, "3"),
+            (4, "4"),
+            (5, "5")
+        ]
+    )
     class Meta:
         model = Review
-        fields = ['headline', 'rating', 'body']
+        fields = ['headline', 'body']
         labels = {
             'headline': "Titre",
-            'rating': "Note",
             'body': "Commentaire",
         }
 
