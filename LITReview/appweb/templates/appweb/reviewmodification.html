@@ -8,9 +8,11 @@
         <h2 class="main__TitleDiv__Title">Modifier une critique</h2>
     </div>
     <div class="Main__Review__Ticket">
-        <p>Livre/Article</p>
+        <p class="text_sized">Vous êtes en train de poster en réponse à </p>
         <div class="main__Review__Ticket__ticketItem">
-            <p class="main__Review__Ticket__ticketItem__dateTime"> {{ instance_ticket.time_created }} </p>
+            <div class="time-right-space">
+                <p class="main__Review__Ticket__ticketItem__dateTime"> {{ instance_ticket.time_created }} </p>
+            </div>
             {% if instance_ticket.user.id == request.user.id %}
                 <p class="main__Review__Ticket__ticketItem__user"> Vous avez demandé une critique</p>
             {% else %}
@@ -21,14 +23,25 @@
             {% if instance_ticket.image %}
                 <img src=" {{instance_ticket.image.url}} " alt="Image ticket" class="image">
             {% endif %}
+            <div class="button_space"></div>
         </div>
+        <div class="button_space"></div>
     </div>
     <div class="Main__Review__Review">
-        <p>Critique</p>
-        <form method="POST" action="{% url 'reviewmodification' id_review=form.instance.id %}">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button class="btn" type="submit">Envoyer</button>
-        </form>
+        <p class="text_sized">Critique</p>
+        <div class="Main__Review__ReviewCreationBlock__Review">
+            <form method="POST" action="{% url 'reviewmodification' id_review=form.instance.id %}">
+                {% csrf_token %}
+                <p class="text_sized">Titre</p>
+                <p class="main__ReviewCreationBlock__form">{{ form.headline}}</p>
+                <p class="text_sized">Note</p>
+                <p class="main__ReviewCreationBlock__form">{{ form.ratingcustom}}</p>
+                <p class="text_sized">Commentaire</p>
+                <p class="main__ReviewCreationBlock__form">{{ form.body}}</p>
+                <p hidden>{{ form.ticket }}</p>
+                <div class="btn-right-space">
+                    <button class="btn" type="submit">Envoyer</button>
+                </div>
+            </form>
     </div>
 {% endblock content %}

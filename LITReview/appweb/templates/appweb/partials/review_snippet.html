@@ -1,5 +1,7 @@
 <div class="main__fluxlist__reviewblock__reviewItem">
-    <p class="main__fluxlist__reviewblock__reviewItem__dateTime"> {{ review.time_created }} </p>
+    <div class="time-right-space">
+        <p class="main__fluxlist__reviewblock__reviewItem__dateTime"> {{ review.time_created }} </p>
+    </div>
     {% if review.user.id == request.user.id %}
         <p class="main__fluxlist__reviewblock__reviewItem__user"> Vous avez publié une critique</p>
     {% else %}

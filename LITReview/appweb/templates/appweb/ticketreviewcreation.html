@@ -4,20 +4,36 @@
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
+    <div class="button_space"></div>
     <div class="main__Review__TitleDiv">
-        <h2 class="main__TitleDiv__Title">Créer une critique</h2>
+        <p class="main__TitleDiv__Title text_sized">Créer une critique</p>
     </div>
     <form method="POST" enctype="multipart/form-data" action="{% url 'ticketreviewcreation'%}">
-        <div class="Main__Review__Ticket">
-            <p>Livre/Article</p>
-                {% csrf_token %}
-                {{ ticket_form.as_p }}
+        <div class="main__Review__TicketCreationBlock">
+            <p class="text_sized">Livre/Article</p>
+            <div class="Main__Review__TicketCreationBlock__Ticket">
+                <p class="text_sized">Titre</p>
+                <p class="main__TicketCreationBlock__form">{{ ticket_form.title }}</p>
+                <p class="text_sized">Description</p>
+                <p class="main__TicketCreationBlock__form">{{ ticket_form.description}}</p>
+                <p class="text_sized">Image</p>
+                <p class="main__TicketCreationBlock__form">{{ ticket_form.image}}</p>
+            </div>
         </div>
-        <div class="Main__Review__Review">
-            <p>Critique</p>
-                {% csrf_token %}
-                {{ review_form.as_p}}
+        <div class="main__Review__ReviewCreationBlock">
+            <p class="text_sized">Critique</p>
+            <div class="Main__Review__ReviewCreationBlock__Review">
+                    {% csrf_token %}
+                    <p class="text_sized">Titre</p>
+                    <p class="main__ReviewCreationBlock__form">{{ review_form.headline}}</p>
+                    <p class="text_sized">Note</p>
+                    <p class="main__ReviewCreationBlock__form">{{ review_form.ratingcustom}}</p>
+                    <p class="text_sized">Commentaire</p>
+                    <p class="main__ReviewCreationBlock__form">{{ review_form.body}}</p>
+            </div>
+            <div class="btn-right-space">
+                <button class="btn" type="submit">Envoyer</button>
+            </div>
         </div>
-        <button class="btn" type="submit">Envoyer</button>
     </form>
 {% endblock content %}

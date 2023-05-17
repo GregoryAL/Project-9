@@ -10,6 +10,7 @@ body{
     grid-gap: 15px;
     overflow: auto;
     align-items: center;
+    margin: 15px;
 }
 .Header__content__left{
     justify-self: start;
@@ -38,4 +39,9 @@ body{
 .btn:hover{
     font-weight: bold;
     cursor: pointer;
+}
+.litreviewtitle{
+    font-size: large;
+    font-weight: bold;
+    margin: auto;
 }

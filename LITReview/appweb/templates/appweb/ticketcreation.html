@@ -4,17 +4,28 @@
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
+    <div class="button_space"></div>
     <div class="main__TitleDiv">
-        <h2 class="main__TitleDiv__Title">Créer un Ticket</h2>
+        <p class="main__TitleDiv__Title text_sized">Créer un Ticket</p>
     </div>
-    {% if form.instance.id %}
-        <form method="POST" enctype="multipart/form-data" action="{% url 'ticketcreation' id_ticket=form.instance.id %}">
-    {% else %}
-        <form method="POST" enctype="multipart/form-data" action="{% url 'ticketcreation'%}">
-    {% endif %}
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn" type="submit">Envoyer</button>
-        </form>
+    <div class="main__TicketCreationBlock">
+        {% if form.instance.id %}
+            <form method="POST" enctype="multipart/form-data" action="{% url 'ticketcreation' id_ticket=form.instance.id %}">
+        {% else %}
+            <form method="POST" enctype="multipart/form-data" action="{% url 'ticketcreation'%}">
+        {% endif %}
+                {% csrf_token %}
+                <p class="text_sized">Titre</p>
+                <p class="main__TicketCreationBlock__form">{{ form.title }}</p>
+                <p class="text_sized">Description</p>
+                <p class="main__TicketCreationBlock__form">{{ form.description}}</p>
+                <p class="text_sized">Image</p>
+                <p class="main__TicketCreationBlock__form">{{ form.image}}</p>
+                <div class="btn-right-space">
+                    <button class="btn" type="submit">Envoyer</button>
+                </div>
+            </form>
+    </div>
+
 
 {% endblock content %}

@@ -1,3 +1,3 @@
 {% if review.user.id == request.user.id %}
-    <a class="btn" href="{% url 'reviewmodification' id_review=review.id %}">Modifier cette critique</a>
+    <a class="btn" href="{% url 'reviewmodification' id_review=review.id %}">Modifier</a>
 {% endif %}

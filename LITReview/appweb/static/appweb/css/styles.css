@@ -12,6 +12,35 @@
     margin-bottom: 10px;
     display: block;
 }
+.main__Review__TicketCreationBlock, .main__Review__ReviewCreationBlock, .Main__Review__Ticket, .Main__Review__Review{
+    width: 80vw;
+    border: 1px solid black;
+    margin: auto;
+    display: block;
+}
+.Main__Review__TicketCreationBlock__Ticket, .Main__Review__ReviewCreationBlock__Review{
+    width: 70vw;
+    margin: auto;
+    display: block;
+}
+.main__Review__Ticket__ticketItem{
+    width: 70vw;
+    border: 1px solid black;
+    margin: auto;
+    display: block;
+}
+.main__TicketCreationBlock{
+    width: 70vw;
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+}
+#id_title, #id_description, #id_headline, #id_body{
+    width: 70vw;
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+}
 .main__fluxlist{
     display: flex;
     flex-direction: column;
@@ -37,7 +66,7 @@
     width: 60vw;
     height: 70px;
 }
-.main__subscription__title{
+.main__subscription__title, .main__TitleDiv__Title{
     text-align: center;
 }
 .main__subscription__followed__item{
@@ -56,30 +85,25 @@
     grid-template-columns: 1fr;
     border: solid black 1px;
 }
-.btn{
-    align-items: end;
+.btn-right-space{
+    display: flex;
+    justify-content: flex-end;
 }
-
+.time-right-space{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
 .image{
     width: 150px;
     height: 150px;
-}
-.formimage{
-    display: flex;
-    position: relative;
-}
-.formimage__field{
-    position: absolute;
-    align-self: center;
-    opacity: 0;
-}
-.formimage__btnimage{
-    position: relative;
-    align-self: start;
 }
 .rate {
     display: flex;
     text-align: center;
     flex-direction: row;
-    gap: 30px;
+    gap: 10vw;
+}
+.text_sized{
+    font-size: larger;
 }
