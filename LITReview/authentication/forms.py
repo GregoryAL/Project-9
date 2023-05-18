@@ -5,11 +5,13 @@ from django.core.exceptions import ValidationError
 
 
 class LoginForm(forms.Form):
+    # Login form with a username and a password, add a placeholder for each field
     username = forms.CharField(max_length=63, label='Nom d’utilisateur', widget=forms.TextInput(attrs={'placeholder': "Nom d'utilisateur"}))
     password = forms.CharField(max_length=63, widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe"}), label='Mot de passe')
 
 
 class SignupForm(forms.ModelForm):
+    # Signup form with 2 password charfield and the model username one, with placeholder for each one.
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe"}),
@@ -23,6 +25,7 @@ class SignupForm(forms.ModelForm):
         'password2': None
     }
     class Meta(UserCreationForm.Meta):
+        # bind the form to the Model user
         model = get_user_model()
         help_texts = {
             'username': None
@@ -36,7 +39,7 @@ class SignupForm(forms.ModelForm):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise ValidationError("Passwords don't match")
+            raise ValidationError("Les mots de passe ne sont pas les mêmes.")
         return password2
 
     def save(self, commit=True):

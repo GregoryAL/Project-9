@@ -1,26 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+<!-- include the css sheet dedicated to authentication app -->
 <link rel="stylesheet" href="{% static 'authentication/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="Startup">
         <div class="Startup__Signup">
+            <!-- Html for the signup part (left) (title and button) -->
             <div class="button_space"></div>
             <h2 class="Startup__Signup__Title">Inscrivez-vous maintenant</h2>
             <div class="Startup__Signup__Button"><a class="btn" href="{% url 'signup' %}">S'inscrire</a></div>
+        <!-- end of Startup__Signup div -->
         </div>
         <div class="Startup__Login">
+            <!-- Html for the login part (right) (login forms and button) -->
             <div class="button_space"></div>
             <form method="post">
                 <h2 class="Startup__Login__Title">Connectez-Vous</h2>
                 <p class="Startup__Login__Title">{{ message }}</p>
+                <!-- room for an error message if login fails -->
                 <p class="Startup__Login__Form">{{ form.username }}</p>
                 <p class="Startup__Login__Form">{{ form.password }}</p>
                 {% csrf_token %}
                 <div class="Startup__Login__Button"><button class="btn" type="submit" >Se connecter</button></div>
+            <!-- end of login form -->
             </form>
+        <!-- end of Startup__Login div-->
         </div>
+    <!-- end of Startup div -->
     </div>
-
 {% endblock content %}

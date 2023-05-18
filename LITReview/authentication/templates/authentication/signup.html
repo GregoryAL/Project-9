@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+<!-- include the css sheet dedicated to authentication app -->
 <link rel="stylesheet" href="{% static 'authentication/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="Signup">
         <h2>Inscrivez-vous</h2>
         {% if form.errors %}
+        <!-- Display error message if any -->
             {{ form.errors }}
         {% endif %}
         <form method="post">
@@ -17,7 +19,10 @@
             <div class="Signup__Button">
                 <a class="btn" href="{% url 'login' %}">Retourner</a>
                 <button class="btn" type="submit" >S’inscrire</button>
+            <!-- end of Signup__Button div -->
             </div>
+        <!-- end of signup form -->
         </form>
+    <!-- end of Signup div -->
     </div>
 {% endblock content %}
