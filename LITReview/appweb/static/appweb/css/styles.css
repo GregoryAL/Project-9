@@ -41,6 +41,13 @@
     margin-bottom: 10px;
     display: block;
 }
+#id_username{
+    text-align: center;
+}
+.main__subscription__subscription__errormessage{
+    text-align: center;
+    margin: 30px;
+}
 .main__fluxlist{
     display: flex;
     flex-direction: column;

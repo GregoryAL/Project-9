@@ -6,14 +6,17 @@
 {% block content %}
     <div class="Startup">
         <div class="Startup__Signup">
-            <h2>Inscrivez-vous maintenant</h2>
+            <div class="button_space"></div>
+            <h2 class="Startup__Signup__Title">Inscrivez-vous maintenant</h2>
             <div class="Startup__Signup__Button"><a class="btn" href="{% url 'signup' %}">S'inscrire</a></div>
         </div>
         <div class="Startup__Login">
-            <p>{{ message }}</p>
+            <div class="button_space"></div>
             <form method="post">
-                <h2>Connectez-Vous</h2>
-                {{ form.as_p }}
+                <h2 class="Startup__Login__Title">Connectez-Vous</h2>
+                <p class="Startup__Login__Title">{{ message }}</p>
+                <p class="Startup__Login__Form">{{ form.username }}</p>
+                <p class="Startup__Login__Form">{{ form.password }}</p>
                 {% csrf_token %}
                 <div class="Startup__Login__Button"><button class="btn" type="submit" >Se connecter</button></div>
             </form>

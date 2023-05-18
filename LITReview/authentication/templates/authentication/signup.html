@@ -10,7 +10,9 @@
             {{ form.errors }}
         {% endif %}
         <form method="post">
-            {{ form.as_p }}
+            <p>{{ form.username }}</p>
+            <p>{{ form.password1}}</p>
+            <p>{{ form.password2}}</p>
             {% csrf_token %}
             <div class="Signup__Button">
                 <a class="btn" href="{% url 'login' %}">Retourner</a>

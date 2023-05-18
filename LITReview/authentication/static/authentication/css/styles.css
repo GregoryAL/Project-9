@@ -5,12 +5,37 @@
     overflow: auto;
     align-items: center;
 }
+@media (max-width: 600px) {
+    .Startup, .Signup__Button{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .Startup__Login__Button{
+        margin: auto;
+        display: flex;
+    }
+}
+.button_space{
+    margin: 40px;
+}
 .Startup__Login, .Startup__Signup{
     margin: auto;
+    width: 40vw;
+    height: 30vh;
 }
-.Startup__Signup__Button{
+.Startup__Signup__Button, .Startup__Signup__Title, .Startup__Login__Title{
     display: flex;
     justify-content: center;
+}
+.Startup__Login__Form{
+    justify-items: center;
+}
+#id_username, #id_password, #id_password1, #id_password2{
+    width: 30vw;
+    margin: auto;
+    display: flex;
+    height: 5vh;
 }
 .Startup__Login__Button, .Signup__Button{
     display: flex;
