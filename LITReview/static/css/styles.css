@@ -1,3 +1,6 @@
+/* css for generic design around all website or for the header / footer */
+
+/* CSS for header / footer : */
 body{
     border: 2px solid black;
 }
@@ -23,10 +26,17 @@ body{
 .Header__content__title{
     margin: auto;
 }
+.litreviewtitle{
+    font-size: large;
+    font-weight: bold;
+    margin: auto;
+}
 .Main{
     margin-left: 5px;
 
 }
+
+/* CSS generic : */
 .btn{
     border: 2px solid black;
     border-radius: 3px;
@@ -39,9 +49,4 @@ body{
 .btn:hover{
     font-weight: bold;
     cursor: pointer;
-}
-.litreviewtitle{
-    font-size: large;
-    font-weight: bold;
-    margin: auto;
 }
