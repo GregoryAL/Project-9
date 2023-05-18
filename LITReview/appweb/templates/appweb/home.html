@@ -1,37 +1,59 @@
+<!-- get the base template and expends from it -->
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
+{# load CSS sheet used for appweb app #}
 {% endblock style %}
 {% block content %}
     <div class="main__buttons">
-        <div class="main__buttons__askingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Demander une critique</a></div>
-        <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketreviewcreation' %}">Créer une critique</a></div>
+        {# create 2 buttons, one to create a ticket, the other to create a couple ticket/review #}
+        <div class="main__buttons__askingcritic"><a class="btn" href="{% url 'ticketcreation' %}">Demander une
+            critique</a></div>
+        <div class="main__buttons__creatingcritic"><a class="btn" href="{% url 'ticketreviewcreation' %}">Créer une
+            critique</a></div>
+    <!-- end of main__buttons div -->
     </div>
     <div class="main__fluxlist">
+        {# iterate through all the post in posts #}
         {% for post in posts %}
+            {# check if post is a Ticket without review #}
             {% if post.content_type == 'TicketWithoutReview' %}
                 <div class="main__fluxlist__block">
                     <div class="main__fluxlist__ticketItem">
+                        {# include ticket snippet, review creation button snippet with post as ticket variable #}
                         {% include 'appweb/partials/ticket_snippet.html' with ticket=post %}
                         {% include 'appweb/partials/review_btn_creation_snippet.html' with ticket=post %}
                         <p class="button_space"></p>
+                    <!-- end of main__fluxlist__ticketItem -->
                     </div>
+                <!-- end of main__fluxlist_block  -->
                 </div>
+            {# check if post is a Review #}
             {% elif post.content_type == 'Review' %}
+                {# go through all the ticket in ticketswithreview #}
                 {% for ticket in ticketswithreview %}
+                    {# check if the ticket is the one bound to the review #}
                     {% if ticket.id == post.ticket.id %}
                         <div class="main__fluxlist__block">
+                            {# include the review_snippet with post as a review variable and ticket as a ticket
+                            variable #}
                             {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
                             <div class="main_fluxlist__reviewblock__ticketItem">
+                                {# include the ticket_snippet with ticket as a variable #}
                                 {% include 'appweb/partials/ticket_snippet.html' with ticket=ticket withreview=True %}
+                            <!-- end of main_fluxlist__reviewblock__ticketItem div-->
                             </div>
+                        <!-- end of main__fluxlist__block div -->
                         </div>
+                    {# end of if loop if the ticket in ticketswithreview is the ticket bound to the review #}
                     {% endif %}
+                {# end of iteration of ticket in ticketswithreview variable #}
                 {% endfor %}
-
+            {# end of if loop when post is a review #}
             {% endif %}
-            </div>
+        {# end of iteration of post in posts #}
         {% endfor %}
+    <!-- End of main__fluxlist div -->
     </div>
 {% endblock content %}

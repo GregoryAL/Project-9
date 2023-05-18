@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+{# load css sheet specific to appweb app #}
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="main__Review__TitleDiv">
         <h2 class="main__TitleDiv__Title">Modifier une critique</h2>
+    <!-- end of main__review__titlediv -->
     </div>
     <div class="Main__Review__Ticket">
         <p class="text_sized">Vous êtes en train de poster en réponse à </p>
         <div class="main__Review__Ticket__ticketItem">
             <div class="time-right-space">
                 <p class="main__Review__Ticket__ticketItem__dateTime"> {{ instance_ticket.time_created }} </p>
+            <!-- end of time-right-space div -->
             </div>
+            {# check if the user is the writer of the ticket to display either "vous" or the ticket s writer name #}
             {% if instance_ticket.user.id == request.user.id %}
                 <p class="main__Review__Ticket__ticketItem__user"> Vous avez demandé une critique</p>
             {% else %}
@@ -20,12 +24,15 @@
             {% endif %}
             <p> {{ instance_ticket.title }}</p>
             <p> {{ instance_ticket.description}}</p>
+            {# check if ticket got an image and display it if so #}
             {% if instance_ticket.image %}
                 <img src=" {{instance_ticket.image.url}} " alt="Image ticket" class="image">
             {% endif %}
             <div class="button_space"></div>
+        <!-- end of main__review__ticket__ticketitem div -->
         </div>
         <div class="button_space"></div>
+    <!-- end of main__review__ticket div -->
     </div>
     <div class="Main__Review__Review">
         <p class="text_sized">Critique</p>
@@ -38,10 +45,16 @@
                 <p class="main__ReviewCreationBlock__form">{{ form.ratingcustom}}</p>
                 <p class="text_sized">Commentaire</p>
                 <p class="main__ReviewCreationBlock__form">{{ form.body}}</p>
+                {# hidden form.ticket to match form #}
                 <p hidden>{{ form.ticket }}</p>
                 <div class="btn-right-space">
                     <button class="btn" type="submit">Envoyer</button>
+                <!-- end of btn-right space div -->
                 </div>
+            <!-- end of form -->
             </form>
+        <!-- end of main__review__reviewcreationblock__review -->
+        </div>
+    <!-- end of main__review__review div -->
     </div>
 {% endblock content %}

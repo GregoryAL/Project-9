@@ -1,3 +1,4 @@
+{# modifying ticket button snippet #}
 {% if ticket.user.id == request.user.id %}
     <a class="btn" href="{% url 'ticketcreation' id_ticket=ticket.id %}">Modifier</a>
 {% endif %}

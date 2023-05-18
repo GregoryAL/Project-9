@@ -1,6 +1,9 @@
+{# ticket snippet #}
 <div class="time-right-space">
     <p class="main__fluxlist__ticketItem__dateTime"> {{ ticket.time_created }} </p>
+<!-- end of time-right-space div -->
 </div>
+{# check if the user is the ticket s writer to display 'vous' or the ticket's writer name #}
 {% if ticket.user.id == request.user.id %}
     <p class="main__fluxlist__ticketItem__user"> Vous avez demandé une critique</p>
 {% else %}
@@ -8,6 +11,7 @@
 {% endif %}
 <p> {{ ticket.title }}</p>
 <p> {{ ticket.description}}</p>
+{# check if there's an image and display it, if so #}
 {% if ticket.image %}
     <img src=" {{ticket.image.url}} " alt="Image ticket" class="image">
 {% endif %}

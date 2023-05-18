@@ -1,3 +1,45 @@
+/* CSS sheet related to appweb app */
+
+
+/* CSS used for component used in multiple template */
+.btn-right-space{
+    display: flex;
+    justify-content: flex-end;
+}
+.time-right-space{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+.image{
+    width: 150px;
+    height: 150px;
+}
+.rate {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    gap: 10vw;
+}
+.text_sized{
+    font-size: larger;
+}
+.button_space{
+    margin: 40px;
+}
+
+/* CSS used to modify forms fields display */
+#id_title, #id_description, #id_headline, #id_body{
+    width: 70vw;
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+}
+#id_username{
+    text-align: center;
+}
+
+/* CSS used to modify display on the app templates */
 .main__fluxlist__block, .main__postlist__block{
     width: 90vw;
     border: 1px solid black;
@@ -35,15 +77,7 @@
     margin-bottom: 10px;
     display: flex;
 }
-#id_title, #id_description, #id_headline, #id_body{
-    width: 70vw;
-    margin: auto;
-    margin-bottom: 10px;
-    display: block;
-}
-#id_username{
-    text-align: center;
-}
+
 .main__subscription__subscription__errormessage{
     text-align: center;
     margin: 30px;
@@ -53,9 +87,7 @@
     flex-direction: column;
     align-items: center;
 }
-.button_space{
-    margin: 40px;
-}
+
 .main__buttons{
     height: 70px;
     display: flex;
@@ -91,26 +123,4 @@
     display: grid;
     grid-template-columns: 1fr;
     border: solid black 1px;
-}
-.btn-right-space{
-    display: flex;
-    justify-content: flex-end;
-}
-.time-right-space{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 15px;
-}
-.image{
-    width: 150px;
-    height: 150px;
-}
-.rate {
-    display: flex;
-    text-align: center;
-    flex-direction: row;
-    gap: 10vw;
-}
-.text_sized{
-    font-size: larger;
 }

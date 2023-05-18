@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+{# load css sheet specific to appweb app #}
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="button_space"></div>
     <div class="main__TitleDiv">
         <p class="main__TitleDiv__Title text_sized">Créer un Ticket</p>
+    <!-- end of main__titlediv div -->
     </div>
     <div class="main__TicketCreationBlock">
+        {# create or modify a ticket depending if there's an form.instance.id (template/id_ticket in navbar) #}
         {% if form.instance.id %}
             <form method="POST" enctype="multipart/form-data" action="{% url 'ticketcreation' id_ticket=form.instance.id %}">
         {% else %}
@@ -23,9 +26,9 @@
                 <p class="main__TicketCreationBlock__form">{{ form.image}}</p>
                 <div class="btn-right-space">
                     <button class="btn" type="submit">Envoyer</button>
+                <!-- end of btn-right-space div -->
                 </div>
             </form>
+    <!-- end of main__ticketcreationblock div -->
     </div>
-
-
 {% endblock content %}

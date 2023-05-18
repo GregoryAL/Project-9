@@ -1,41 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+{# load the css sheet specific for appweb app #}
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="main__postlist">
-        <div class="button_space">
+        <div class="button_space"></div>
+        {# iterate through post in posts #}
         {% for post in posts %}
+            {# check if post is a ticket #}
             {% if post.content_type == 'Ticket' %}
                 <div class="main__postlist__block">
                     <div class="main__postlist__ticketItem">
+                        {# include the ticket snippet with post as ticket variable #}
                         {% include 'appweb/partials/ticket_snippet.html' with ticket=post %}
                         <div class="btn-right-space">
+                            {# include 2 buttons snippets to modify or delete the ticket #}
                             {% include 'appweb/partials/ticket_btn_modify_snippet.html' with ticket=post %}
                             {% include 'appweb/partials/ticket_btn_delete_snippet.html' with ticket=post %}
+                        <!-- end of btn_right_space div -->
                         </div>
                         <p class="button_space"></p>
+                    <!-- end of main__postlist__ticketItem div -->
                     </div>
+                <!-- end of the main__postlist__block div -->
                 </div>
+            {# Check if post is a review #}
             {% elif post.content_type == 'Review' %}
+                {# iterate through all the ticket in reviewsticket #}
                 {% for ticket in reviewsticket %}
+                    {# check if ticket is the same as the one bound the review in post #}
                     {% if ticket.id == post.ticket.id %}
                         <div class="main__postlist__block">
+                            {# include the review snippet with post as review variable #}
                             {% include 'appweb/partials/review_snippet.html' with review=post %}
                             <div class="main_fluxlist__reviewblock__ticketItem">
+                                {# include the ticket snippet with ticket as ticket variable #}
                                 {% include 'appweb/partials/ticket_snippet.html' with ticket=ticket %}
+                            <!-- end of main_fluxlist__reviewblock__ticketItem div -->
                             </div>
                             <div class="btn-right-space">
+                                {# include 2 buttons to modify of delete the review #}
                                 {% include 'appweb/partials/review_btn_modify_snippet.html' with review=post %}
                                 {% include 'appweb/partials/review_btn_delete_snippet.html' with review=post %}
+                            <!-- end of btn-right-space div -->
                             </div>
                             <p class="button_space"></p>
+                        <!-- end of main__postlist__block div -->
                         </div>
+                    {# end of if loop checking ticket is the same as the one bound to Review #}
                     {% endif %}
+                {# end of iteration through tickets in reviewsticket #}
                 {% endfor %}
+            {# end of if loop checking post type #}
             {% endif %}
-            </div>
+        {# end of iteration of post in posts #}
         {% endfor %}
+    <!-- end of main_postlist div -->
     </div>
 {% endblock content %}

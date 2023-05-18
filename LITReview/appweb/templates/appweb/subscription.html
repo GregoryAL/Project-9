@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
+{# load css sheet specific to appweb app #}
 <link rel="stylesheet" href="{% static 'appweb/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="main__subscription">
+        {# let the logged-in user subscribe to other users  #}
         <div class="main__subscription__subscription">
             <p class="main__subscription__title">Suivre d'autres utilisateurs</p>
             <form method="POST" action="{% url 'subscription'%}">
@@ -12,30 +14,43 @@
                 <div class="main__subscription__subscription__input">
                     {{ form }}
                     <button class="btn" type="submit">Envoyer</button>
+                <!-- end of main__subscription_subscription__input div -->
                 </div>
             </form>
+            {# display a message after subscription submission, either to validate or point out the error #}
             <div class="main__subscription__subscription__errormessage">
                 {% if message %}
                     {{ message }}
                 {% endif %}
+            <!-- end of main__subscription__subscription__errormessage div -->
             </div>
+        <!-- end of main__subscription__subscription dib -->
         </div>
+        {# display people that user is following and allow to unfollow with a clickable link #}
         <div class="main__subscription__followed">
             <p class="main__subscription__title">Abonnements</p>
+            {# iterate through users in usersfollowing #}
             {% for relation in usersfollowing %}
                 <div class="main__subscription__followed__item">
                     {{relation.followed_user}}
                     <a href="{% url 'deletesubscription' id_subscription=relation.id %}" class="main__subscription__followed__item__link">Désabonner</a>
+                <!-- end of main__subscription__followed__item div -->
                 </div>
             {% endfor %}
+        <!-- end of main__subscription_followed div -->
         </div>
+        {# display people following user #}
         <div class="main__subscription__follower">
             <p class="main__subscription__title">Abonnés</p>
+            {# iterate through users in usersfollowed #}
             {% for user in usersfollowed %}
                 <div class="main__subscription__follower__item">
                 {{user.user}}
+                <!-- end of main__subscription__follower__item div -->
                 </div>
             {% endfor %}
+        <!-- end of main__subscription__follower div -->
         </div>
+    <!-- end of main__subscription div -->
     </div>
 {% endblock content %}

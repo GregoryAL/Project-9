@@ -1,3 +1,4 @@
+{# deletion ticket button #}
 {% if ticket.user.id == request.user.id %}
     <a class="btn" href="{% url 'deleteticket' id_ticket=ticket.id %}">Supprimer</a>
 {% endif %}

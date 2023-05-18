@@ -1,3 +1,4 @@
+{# deletion review btn snippet #}
 {% if review.user.id == request.user.id %}
     <a class="btn" href="{% url 'deletereview' id_review=review.id %}">Supprimer</a>
 {% endif %}

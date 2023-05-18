@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
-<!-- include the css sheet dedicated to authentication app -->
+{# include the css sheet dedicated to authentication app #}
 <link rel="stylesheet" href="{% static 'authentication/css/styles.css' %}">
 {% endblock style %}
 {% block content %}
     <div class="Signup">
         <h2>Inscrivez-vous</h2>
         {% if form.errors %}
-        <!-- Display error message if any -->
+        {# Display error message if any #}
             {{ form.errors }}
         {% endif %}
         <form method="post">
