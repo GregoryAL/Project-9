@@ -17,7 +17,7 @@ def home(request):
     reviews = Review.objects.filter(
         Q(user=request.user) |
         Q(user__followed_by__user=request.user)
-    ).annotate(content_type=Value('Review', CharField()))
+    ).distinct().annotate(content_type=Value('Review', CharField()))
     # query to store all the tickets written by logged-in user or by users followed by logged-in user which doesn't
     # have a review, add a content type with a "TicketWithoutReview" value
     ticketsWithoutReview = Ticket.objects.filter(
