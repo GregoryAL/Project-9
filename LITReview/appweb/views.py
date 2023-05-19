@@ -192,8 +192,12 @@ def ticket_creation(request, id_ticket=None):
 
 @login_required
 def review_modification(request, id_review):
+    # view used to modify a review
+    # query to get the object review from id_review
     instance_review = Review.objects.get(pk=id_review)
+    # query to get the object ticket from the review's related ticket
     instance_ticket = Ticket.objects.get(pk=instance_review.ticket.id)
+    # check if the user that want to modify the review is the writer
     if instance_review.user.id == request.user.id:
         if request.method == "GET":
             form = ReviewCreation(instance=instance_review, initial={'ratingcustom': instance_review.rating})
@@ -214,8 +218,11 @@ def review_modification(request, id_review):
 
 @login_required
 def review_creation(request, id_ticket=None):
+    # view used to create a review
+    # query to get the ticket associated to the review
     instance_ticket = Ticket.objects.get(pk=id_ticket) if id_ticket is not None else None
     if request.method == "GET":
+        # load the form with the instance.ticket initialed as the ticket previously queried
         form = ReviewCreation(initial={'ticket': instance_ticket})
         context = {
             'form': form,
@@ -233,7 +240,9 @@ def review_creation(request, id_ticket=None):
 
 @login_required
 def ticket_review_creation(request):
+    # view used to create a ticket and a review at the same time
     if request.method == "GET":
+        # load both ticket and review forms
         ticket_form = TicketCreation()
         review_form = ReviewCreationWithoutTicket()
         context = {
@@ -245,8 +254,11 @@ def ticket_review_creation(request):
         ticket_form = TicketCreation(request.POST, request.FILES)
         review_form = ReviewCreationWithoutTicket(request.POST)
         if ticket_form.is_valid():
+            # first check if the ticket form is valid, and if so, save the object in the table and store it in
+            # instance_ticket variable
             instance_ticket = ticket_form.customSave(request.user)
             if review_form.is_valid():
+                # then, save the review object in the review table once user, rating and ticket have been added
                 ratingcustom = review_form.cleaned_data['ratingcustom']
                 instance_review = review_form.save(commit=False)
                 instance_review.user = request.user
