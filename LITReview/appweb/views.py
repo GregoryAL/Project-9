@@ -18,8 +18,8 @@ def home(request):
         Q(user=request.user) |
         Q(user__followed_by__user=request.user)
     ).annotate(content_type=Value('Review', CharField()))
-    # query to store all the tickets written by logged-in user or by users followed by logged-in user which doesn't have
-    # a review, add a content type with a "TicketWithoutReview" value
+    # query to store all the tickets written by logged-in user or by users followed by logged-in user which doesn't
+    # have a review, add a content type with a "TicketWithoutReview" value
     ticketsWithoutReview = Ticket.objects.filter(
         Q(user=request.user) |
         Q(user__followed_by__user=request.user)
@@ -210,7 +210,7 @@ def review_modification(request, id_review):
             form = ReviewCreation(request.POST, instance=instance_review)
             if form.is_valid():
                 rating = form.cleaned_data['ratingcustom']
-                review = form.customSave(request.user, rating)
+                form.customSave(request.user, rating)
                 return redirect('home')
     else:
         return redirect('home')
@@ -234,7 +234,7 @@ def review_creation(request, id_ticket=None):
         form = ReviewCreation(request.POST)
         if form.is_valid():
             rating = form.cleaned_data['ratingcustom']
-            review = form.customSave(request.user, rating)
+            form.customSave(request.user, rating)
             return redirect('home')
 
 

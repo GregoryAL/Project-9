@@ -1,5 +1,5 @@
 from django import forms
-from appweb.models import UserFollows, Ticket, Review
+from appweb.models import Ticket, Review
 
 
 class FollowingForm(forms.Form):
@@ -77,6 +77,7 @@ class ReviewCreationWithoutTicket(forms.ModelForm):
             (5, "5")
         ]
     )
+
     class Meta:
         # bind the form to Review model, use headline and body field
         model = Review
@@ -85,4 +86,3 @@ class ReviewCreationWithoutTicket(forms.ModelForm):
             'headline': "Titre",
             'body': "Commentaire",
         }
-

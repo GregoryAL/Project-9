@@ -6,8 +6,16 @@ from django.core.exceptions import ValidationError
 
 class LoginForm(forms.Form):
     # Login form with a username and a password, add a placeholder for each field
-    username = forms.CharField(max_length=63, label='Nom d’utilisateur', widget=forms.TextInput(attrs={'placeholder': "Nom d'utilisateur"}))
-    password = forms.CharField(max_length=63, widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe"}), label='Mot de passe')
+    username = forms.CharField(
+        max_length=63,
+        label='Nom d’utilisateur',
+        widget=forms.TextInput(attrs={'placeholder': "Nom d'utilisateur"})
+    )
+    password = forms.CharField(
+        max_length=63,
+        widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe"}),
+        label='Mot de passe'
+    )
 
 
 class SignupForm(forms.ModelForm):
@@ -24,6 +32,7 @@ class SignupForm(forms.ModelForm):
         'password1': None,
         'password2': None
     }
+
     class Meta(UserCreationForm.Meta):
         # bind the form to the Model user
         model = get_user_model()
