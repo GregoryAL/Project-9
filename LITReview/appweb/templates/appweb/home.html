@@ -36,8 +36,7 @@
                     {# check if the ticket is the one bound to the review #}
                     {% if ticket.id == post.ticket.id %}
                         <div class="main__fluxlist__block">
-                            {# include the review_snippet with post as a review variable and ticket as a ticket
-                            variable #}
+                        {# include the review_snippet with post as a review variable and ticket as a ticket variable #}
                             {% include 'appweb/partials/review_snippet.html' with review=post ticket=ticket %}
                             <div class="main_fluxlist__reviewblock__ticketItem">
                                 {# include the ticket_snippet with ticket as a variable #}

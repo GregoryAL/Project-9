@@ -17,8 +17,7 @@
             <!-- end of time-right-space div -->
             </div>
             {% if instance_ticket.user.id == request.user.id %}
-            {# check if the user is the ticket's writer, if so display a message with "vous" , else display a message
-            using the writer s name #}
+            {# check if the user is the ticket's writer, display a message with  either "vous" or the writer s name #}
                 <p class="main__Review__Ticket__ticketItem__user"> Vous avez demandé une critique</p>
             {% else %}
                 <p class="main__Review__Ticket__ticketItem__user"> {{ instance_ticket.user.username }} a demandé une
