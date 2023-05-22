@@ -3,7 +3,12 @@
 
 /* responsive part */
 @media (max-width: 600px) {
-    .Startup, .Signup__Button{
+    .Startup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .Signup__Button{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -16,13 +21,16 @@
 
 /* login/signup css */
 /* split the login template in 2 and center the items */
-.Startup{
+@media (min-width: 601px) {
+    .Startup{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
     overflow: auto;
     align-items: center;
+    }
 }
+
 .button_space{
     margin: 40px;
 }
