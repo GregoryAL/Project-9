@@ -73,7 +73,7 @@ Le projet nous demandant d'inclure la base de donnée, nous allons faire un simp
        
   - sous Linux, saisir : 
        
-  `cd .\LITReview\`
+  `cd /LITReview`
   
   puis 
   
