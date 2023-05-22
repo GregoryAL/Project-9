@@ -65,23 +65,23 @@ Le projet nous demandant d'inclure la base de donnée, nous allons faire un simp
 
   - sous Windows, saisir :
        
-  cd .\LITReview\
+  `cd .\LITReview\`
   
   puis :
   
-  python .\manage.py runserver
+  `python .\manage.py runserver`
        
   - sous Linux, saisir : 
        
-  cd .\LITReview\
+  `cd .\LITReview\`
   
   puis 
   
-  python3 manage.py runserver
+  `python3 manage.py runserver`
 
 ## Résultat attendu :  
 
-- Se rendre à l'adresse : localhost:8000 ou 127.0.0.1:8000
+- Se rendre à l'adresse : `localhost:8000` ou `127.0.0.1:8000`
 
 - Une fois sur le site il est possible de s'inscrire ou se connecter.
 
